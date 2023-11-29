@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main() {
+    int a, b, c, d, e, result;
+
+    printf("Enter values for a, b, c, d, and e: ");
+    scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
+
+    int commonExpr = b * c;
+    result = a + commonExpr + d + commonExpr + e;
+
+    printf("Result: %d\n", result);
+
+    return 0;
+}
