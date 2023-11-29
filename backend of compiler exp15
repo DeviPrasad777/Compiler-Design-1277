@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef enum {
+    ADDITION,
+    SUBTRACTION,
+    VARIABLE,
+    CONSTANT
+} NodeType;
+
+typedef struct {
+    NodeType type;
+    int value;  // For constants and variables
+} Node;
+
+typedef struct {
+    Node result;
+    Node operand1;
+    Node operand2;
+    char op;  // Operator
+} ThreeAddressCode;
+
+void generateCode(Node result, Node operand1, Node operand2, char op) {
+    printf("%d: ", result.value);
+
+    switch (op) {
+        case '+':
+            printf("%d + %d\n", operand1.value, operand2.value);
+            break;
+        case '-':
+            printf("%d - %d\n", operand1.value, operand2.value);
+            break;
+        default:
+            break;
+    }
+}
+
+int main() {
+    Node varA = {VARIABLE, 1};
+    Node varB = {VARIABLE, 2};
+    Node constantC = {CONSTANT, 10};
+    Node resultD = {VARIABLE, 3};
+
+    ThreeAddressCode code1 = {resultD, varA, varB, '+'};
+    ThreeAddressCode code2 = {resultD, code1.result, constantC, '-'};
+
+    // Generate and print three-address code
+    generateCode(code1.result, code1.operand1, code1.operand2, code1.op);
+    generateCode(code2.result, code2.operand1, code2.operand2, code2.op);
+
+    return 0;
+}
