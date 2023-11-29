@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char ch;
+    int charCount = 0, wordCount = 0, lineCount = 0, inWord = 0;
+
+    printf("Enter text (Ctrl+D to end on Unix/Linux, Ctrl+Z on Windows):\n");
+
+    while ((ch = getchar()) != EOF) {
+        // Increment character count for each character
+        charCount++;
+
+        // Check for newline character to increment line count
+        if (ch == '\n') {
+            lineCount++;
+        }
+
+        // Check for space or newline character to indicate the end of a word
+        if (ch == ' ' || ch == '\t' || ch == '\n') {
+            inWord = 0;
+        } else if (!inWord) {
+            // We have entered a new word
+            inWord = 1;
+            wordCount++;
+        }
+    }
+
+    printf("\nCharacter count: %d\n", charCount);
+    printf("Word count: %d\n", wordCount);
+    printf("Line count: %d\n", lineCount);
+
+    return 0;
+}
